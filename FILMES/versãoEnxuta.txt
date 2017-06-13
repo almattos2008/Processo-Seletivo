@@ -1,0 +1,78 @@
+O objetivo do programa é a avaliação para o processo seletivo para o Projeto Oportunidade Acotel;
+
+
+O programa é bem simples e trás competências em Banco de Dados (SQL), PHP, HTML e CSS;
+
+
+Tem duas funções básicas, inserir e consultar dados de filmes;
+
+Arquivos:
+
+		index.html
+
+			Funciona como menu principal
+			
+		estilo.css
+
+			Dá um mínimo de estilo à página
+
+		inserir.html
+
+			Interface para a inserção de dados
+
+		inserir.php
+
+			Código que possibilita a inserção, retornando erro caso algum dos campos não esteja preenchido;
+
+		consultar.html
+
+			Interface para a consulta de dados
+			
+		consultar.php
+
+			Código que retorna a tabela com as informações do Banco de Dados
+
+		bd.sql
+
+			Código para a criação do banco de dados padrão do programa;
+			
+Código de exemplo:
+	
+	Código que acessa o banco de dados para consultar e retorna uma tabela com as informações
+	
+	<?php 
+			session_start();
+			
+			$servidor = '127.0.0.1';
+			$usuario = 'root';
+			$senha = '';
+			$banco = 'filmesbd';
+			$consultar = "SELECT * FROM filmes";
+			
+			$conexao = mysqli_connect($servidor, $usuario, $senha, $banco);
+			$resposta = mysqli_query($conexao, $consultar);
+			
+			$resultados = array();
+			
+			echo "<table>";
+			echo "<tr><td>NOME</td><td>GÊNERO</td><td>ANO</td><td>NOTA</td></tr>";
+			
+			while ($resultado = mysqli_fetch_assoc($resposta)){
+				
+				
+				echo "<tr>";
+				echo "<td>".$resultado['nome']."</td>";
+				echo "<td>".$resultado['genero']."</td>";
+				echo "<td>".$resultado['ano']."</td>";
+				echo "<td>".$resultado['nota']."</td>";
+				echo "</tr>";
+				
+			
+			}
+			
+			echo "</table>";
+			
+			
+			
+			
+	?>
